@@ -1,13 +1,13 @@
 # book-search-engine
 
  ## Table of Contents
-  * [Description](https://github.com/Blopez811	/book-search#description)
-  * [Installation](https://github.com/Blopez811	/book-search#installation)
-  * [Usage](https://github.com/Blopez811	/book-search#usage)
-  * [License](https://github.com/Blopez811	/book-search#license)
-  * [Contributing](https://github.com/Blopez811	/book-search#contributing)
-  * [Tests](https://github.com/Blopez811	/book-search#tests)
-  * [Questions](https://github.com/Blopez811	/book-search#questions)
+  * [Description](https://github.com/Blopez811	/book-search-engine#description)
+  * [Installation](https://github.com/Blopez811	/book-search-engine#installation)
+  * [Usage](https://github.com/Blopez811	/book-search-engine#usage)
+  * [License](https://github.com/Blopez811	/book-search-engine#license)
+  * [Contributing](https://github.com/Blopez811	/book-search-engine#contributing)
+  * [Tests](https://github.com/Blopez811	/book-search-engine#tests)
+  * [Questions](https://github.com/Blopez811	/book-search-engine#questions)
 
   ## Description
    A book search engine
