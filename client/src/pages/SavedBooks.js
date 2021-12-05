@@ -14,10 +14,18 @@ const SavedBooks = () => {
 
   // use this to determine if `useEffect()` hook needs to run again
   // const userDataLength = Object.keys(userData).length;
+  
+  const { loading, data } = useQuery(GET_ME)
+  
+  // useEffect(() => {
+  //   if(data) {
+  //     //update the state
+  //     setUserData(data)
+  //   }
+  // }, [userData])
 
   
 
-  const { loading, data } = useQuery(GET_ME)
   
   const userData = data?.me || [];
   // console.log(userData)
