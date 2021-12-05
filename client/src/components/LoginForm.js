@@ -32,16 +32,16 @@ const LoginForm = () => {
     }
 
     try {
-      const { data } = await loginMutation({ variables: userFormData });
+      const response = await loginMutation({ variables: userFormData });
 
-      if (!data) {
+      if (!response) {
         throw new Error('something went wrong!');
       }
 
       // const { token, user } = await response.json();
       // console.log(user);
       
-      Auth.login(data.login.token);
+      Auth.login(response.data.login.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
