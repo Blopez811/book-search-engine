@@ -40,20 +40,22 @@ const resolvers = {
 
             return { token, user };
         },
-        saveBook: async ({ parent, data }, context) => {
-            console.log(user);
-            try {
-              const updatedUser = await User.findOneAndUpdate(
-                { _id: context.user._id },
-                { $addToSet: { savedBooks: data.input } },
-                { new: true, runValidators: true }
-              );
-              return updatedUser;
-            } catch (err) {
-              console.log(err);
-              return res.status(400).json(err);
-            }
-          },
+       
+        saveBook: async (parent, { bookData }, context) => {
+          if (context.user) {
+            const updatedUser = await User.findByIdAndUpdate(
+              { _id: context.user._id },
+              { $push: { savedBooks: bookData } },
+              { new: true }
+            );
+    
+            return updatedUser;
+          }
+    
+          throw new AuthenticationError('You need to be logged in!');
+        },
+    
+
         removeBook:  async ({ user, params }, res) => {
             const updatedUser = await User.findOneAndUpdate(
               { _id: user._id },
