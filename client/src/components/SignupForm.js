@@ -33,15 +33,15 @@ const SignupForm = () => {
     }
 
     try {
-      const response = await createUserMutation(userFormData);
+      const response = await createUserMutation({ variables: userFormData });
 
-      if (!response.ok) {
+      if (!response) {
         throw new Error('something went wrong!');
       }
 
-      const { token, user } = await response.json();
-      console.log(user);
-      Auth.login(token);
+      // const { token, user } = await response.json();
+      // console.log(user);
+      Auth.login(response.data.addUser.token);
     } catch (err) {
       console.error(err);
       setShowAlert(true);
