@@ -4,6 +4,8 @@ import { Form, Button, Alert } from 'react-bootstrap';
 
 import { loginUser } from '../utils/API';
 import Auth from '../utils/auth';
+import { useMutation } from '@apollo/client';
+import { LOGIN } from '../utils/mutations'
 
 const LoginForm = () => {
   const [userFormData, setUserFormData] = useState({ email: '', password: '' });
@@ -17,6 +19,7 @@ const LoginForm = () => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
+    const [loginMutation, { error }] = useMutation(LOGIN)
 
     // check if form has everything (as per react-bootstrap docs)
     const form = event.currentTarget;
