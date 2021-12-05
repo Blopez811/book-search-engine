@@ -61,16 +61,17 @@ const resolvers = {
         },
     
 
-        removeBook:  async ({ user, params }, res) => {
+        removeBook:  async (parent, args, context ) => {
+          console.log('removedBook Fired:', args)
             const updatedUser = await User.findOneAndUpdate(
-              { _id: user._id },
-              { $pull: { savedBooks: { bookId: params.bookId } } },
+              { _id: context.user._id },
+              { $pull: { savedBooks: { bookId: bookId } } },
               { new: true }
             );
             if (!updatedUser) {
-              return res.status(404).json({ message: "Couldn't find user with this id!" });
+              throw new AuthenticationError('Need to login')
             }
-            return res.json(updatedUser);
+            return updatedUser;
           } 
     }
 }
