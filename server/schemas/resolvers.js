@@ -4,17 +4,20 @@ const { signToken } = require('../utils/auth');
 
 const resolvers = {
     Query: {
-        me: async ({ user = null, params }, res) => {
+     
+      me: async (parent, args, context) => {
             const foundUser = await User.findOne({
-                $or: [{ _id: user ? user._id : params.id }, { username: params.username }],
+              _id: context.user._id
             });
 
             if (!foundUser) {
-                return res.status(400).json({ message: 'Cannot find a user with this id!' });
+                throw new AuthenticationError('Need to log in for this query')
             }
-
-            res.json(foundUser);
+            console.log('foundUserMeQuery', foundUser)
+            return foundUser;
         }
+
+      
     },
     Mutation: {
         addUser: async (parent, args) => {
@@ -41,11 +44,13 @@ const resolvers = {
             return { token, user };
         },
        
-        saveBook: async (parent, { bookData }, context) => {
+        saveBook: async (parent, args, context) => {
+          
+          console.log('SaveBookMutate args:', args)
           if (context.user) {
             const updatedUser = await User.findByIdAndUpdate(
               { _id: context.user._id },
-              { $push: { savedBooks: bookData } },
+              { $push: { savedBooks: args } },
               { new: true }
             );
     

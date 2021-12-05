@@ -69,10 +69,11 @@ const SearchBooks = () => {
     }
 
     try {
-      const { data } = await saveBook({
-        variables: { bookData: { ...bookToSave } },
+      const  data  = await saveBookMutation({
+        variables: { input: {...bookToSave} },
       });
-      console.log(savedBookIds);
+      
+      
       setSavedBookIds([...savedBookIds, bookToSave.bookId]);
     } catch (err) {
       console.error(err);
