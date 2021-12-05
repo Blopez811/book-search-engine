@@ -40,15 +40,15 @@ const resolvers = {
 
             return { token, user };
         },
-        saveBook: async ({ user, body }, res) => {
+        saveBook: async ({ parent, data }, context) => {
             console.log(user);
             try {
               const updatedUser = await User.findOneAndUpdate(
-                { _id: user._id },
-                { $addToSet: { savedBooks: body } },
+                { _id: context.user._id },
+                { $addToSet: { savedBooks: data.input } },
                 { new: true, runValidators: true }
               );
-              return res.json(updatedUser);
+              return updatedUser;
             } catch (err) {
               console.log(err);
               return res.status(400).json(err);
